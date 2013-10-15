@@ -383,7 +383,7 @@ static void gsm_thread_entry(void* parameter)
 			 
 			 //   SMS  Service
 			 SMS_Process();            
-	         rt_thread_delay(25);    	      
+	         rt_thread_delay(15);     	      
 			   
 	}
 }

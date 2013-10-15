@@ -517,7 +517,6 @@ static void App808_thread_entry(void* parameter)
               TCP_RX_Process(app_rx_gsm_infoStruct.link_num);         
 			  Receive_DataFlag=0;	 	   
           }	
-			     
 	   // 3.    ¼ì²éË³Ðò´æ´¢ gps  ±ê×¼ÐÅÏ¢µÄ×´Ì¬ 
 		   Api_CHK_ReadCycle_status();//   Ñ­»·´æ´¢×´Ì¬¼ì²â		
 	   // 4.    808   Send data   		
@@ -525,7 +524,7 @@ static void App808_thread_entry(void* parameter)
 	   {   
 	        Do_SendGPSReport_GPRS();    
 	   } 
-	    rt_thread_delay(8);
+	    rt_thread_delay(10);
        // 5. ---------------  Ë³Ðò´æ´¢ GPS  -------------------		    
 		if(GPS_getfirst)	 //------±ØÐëËÑË÷µ½¾­Î³¶È
 		{
@@ -558,8 +557,8 @@ static void App808_thread_entry(void* parameter)
 			   delay_ms(18); 
                Redial_reset_save=0;  
          	}
-		    rt_thread_delay(12);  	
-          //    485   related  over   	 	   
+	   rt_thread_delay(8);    	
+      //    485   related  over   	 	   
       //---------------------------------------- 
 	   app_thread_runCounter=0; 
 	   //--------------------------------------------------------

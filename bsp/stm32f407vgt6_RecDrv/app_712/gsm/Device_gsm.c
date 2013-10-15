@@ -779,7 +779,7 @@ void  GSM_Buffer_Read_Process(void)
 	rt_err_t	res;
 
 	{
-		res = rt_mq_recv( &mq_GSM,(void*)&GSM_RX_BUFF, 1400, RT_TICK_PER_SECOND / 20 ); //等待100ms,实际上就是变长的延时,最长100ms
+		res = rt_mq_recv( &mq_GSM,(void*)&GSM_RX_BUFF, 1400, 3 ); //等待100ms,实际上就是变长的延时,最长100ms
 		if( res == RT_EOK )                                                     //收到一包数据
 		{
 				GSM_Process(GSM_RX_BUFF.gsm_content, GSM_RX_BUFF.gsm_wr); 
@@ -1908,7 +1908,7 @@ static void GSM_Process(u8 *instr, u16 len)
 	}
 	else  //ERROR: 14 
 	if((strncmp((char*)GSM_rx,"ERROR: 30",9)==0)||(strncmp((char*)GSM_rx,"ERROR: 20",9)==0)||(strncmp((char*)GSM_rx,"ERROR: 14",14)==0)||(strncmp((char*)GSM_rx,"ERROR: 19",14)==0)\
-		||(strncmp((char*)GSM_rx,"ERROR: 6",8)==0)||(strncmp((char*)GSM_rx,"ERROR: 7",8)==0)||(strncmp((char*)GSM_rx,"ERROR: 8",8)==0)||(strncmp((char*)GSM_rx,"ERROR: 10",9)==0))	    
+		||(strncmp((char*)GSM_rx,"ERROR: 6",8)==0)||(strncmp((char*)GSM_rx,"ERROR: 7",8)==0)||(strncmp((char*)GSM_rx,"ERROR: 8",8)==0)||(strncmp((char*)GSM_rx,"ERROR: 10",9)==0)||(strncmp((char*)GSM_rx,"ERROR:35",8)==0))	    
 	{
 		     if (Dial_jump_State==7)
 				{  

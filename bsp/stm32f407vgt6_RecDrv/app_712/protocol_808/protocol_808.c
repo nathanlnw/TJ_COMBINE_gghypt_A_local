@@ -5458,20 +5458,19 @@ u8  Stuff_MultiMedia_Data_0801H(void)
 				   //			content_startoffset 	picpage_offset				 contentpage_offset
                   if(TF_Card_Status()==0) 
                   {
-                   if(Camera_Number==1)
-				      Api_DFdirectory_Read(camera_1, Original_info + Original_info_Wr, 512,1,MediaObj.Media_currentPacketNum); 
-                   else
-				   if(Camera_Number==2)
-				      Api_DFdirectory_Read(camera_2, Original_info + Original_info_Wr, 512,1,MediaObj.Media_currentPacketNum); 
-                   else
-				   if(Camera_Number==3)
-				      Api_DFdirectory_Read(camera_3, Original_info + Original_info_Wr, 512,1,MediaObj.Media_currentPacketNum); 
-                   else
-		     if(Camera_Number==4)
-				      Api_DFdirectory_Read(camera_4, Original_info + Original_info_Wr, 512,1,MediaObj.Media_currentPacketNum);  
- 
-				   	
-      
+	                   if(Camera_Number==1)
+					      Api_DFdirectory_Read(camera_1, Original_info + Original_info_Wr, 512,1,MediaObj.Media_currentPacketNum); 
+	                   else
+					   if(Camera_Number==2)
+					      Api_DFdirectory_Read(camera_2, Original_info + Original_info_Wr, 512,1,MediaObj.Media_currentPacketNum); 
+	                   else
+					   if(Camera_Number==3)
+					      Api_DFdirectory_Read(camera_3, Original_info + Original_info_Wr, 512,1,MediaObj.Media_currentPacketNum); 
+	                   else
+			         if(Camera_Number==4)
+					      Api_DFdirectory_Read(camera_4, Original_info + Original_info_Wr, 512,1,MediaObj.Media_currentPacketNum);  
+ 	   	
+                      rt_thread_delay(7); 
 				      inadd=(Photo_sdState.SD_packetNum-1)<<9; //乘以512
 				   	  if(PicFileSize>inadd)
 				   	  	{
@@ -5489,25 +5488,7 @@ u8  Stuff_MultiMedia_Data_0801H(void)
 				  else
 				   if(TF_Card_Status()==1)  
 				   	{  ;
-				   	 /* inadd=(Photo_sdState.SD_packetNum-1)<<9; //乘以512
-				   	  if(PicFileSize>inadd)
-				   	  	{
-                            if((PicFileSize-inadd)>512)
-                                 readsize=512;
-							else
-							 {	 
-							    readsize=PicFileSize-inadd; // 最后一包  
-							    rt_kprintf("\r\n   最后一包 readsize =%d \r\n",readsize);
-							 }
-				   	  	}
-					  else
-					  	 return false;
-                      i=read_file(PictureName,inadd,readsize,Original_info + Original_info_Wr); 
-					  if(i==false)
-					  	{
-                          rt_kprintf("\r\n 图片文件: %s   读取失败\r\n",PictureName); 
-                          return false;
-					  	} */
+
 				   	} 
 			 Original_info_Wr+=readsize;		 //         
 		          break;
@@ -9092,14 +9073,16 @@ void TCP_RX_Process( u8  LinkNum)  //  ---- 808  标准协议
                                   //  write area   
                                   WatchDog_Feed();
                                   SST25V_BufferWrite(BD_ISP.ContentData,ISP_StartArea+(BD_ISP.CurrentPacket_Num-1)*BD_ISP.PacketSizeGet,infolen);
-								  delay_ms(160);
+								  //delay_ms(160);
+								  rt_thread_delay(12);  
 								  WatchDog_Feed();
                             
 
 								  // read 
 								  memset(ISP_buffer,0,sizeof(ISP_buffer));
 								  SST25V_BufferRead(ISP_buffer,ISP_StartArea+(BD_ISP.CurrentPacket_Num-1)*BD_ISP.PacketSizeGet,infolen); 
-								  delay_ms(120);
+								  //delay_ms(120);
+								  rt_thread_delay(8); 
 
 								  for(i=0;i<infolen;i++)
 								  {

@@ -1103,6 +1103,8 @@ struct rt_thread thread_gps;
 static void rt_thread_entry_gps( void* parameter )
 {
 	rt_err_t	res;
+	//u32  V_1=0;
+	//u32  b1=0,b2=0;  
 
       // 1.  init
        GPS_Abnormal_init();
@@ -1110,7 +1112,8 @@ static void rt_thread_entry_gps( void* parameter )
 	//2.  main while
 	while( 1 )
 	{
-		res = rt_mq_recv( &mq_gps, (void*)&gps_rx, 124, RT_TICK_PER_SECOND / 20 ); //等待100ms,实际上就是变长的延时,最长100ms
+	  //  b1=rt_tick_get(); 
+		res = rt_mq_recv( &mq_gps, (void*)&gps_rx, 124, 3 ); //等待100ms,实际上就是变长的延时,最长100ms
 		if( res == RT_EOK )                                                     //收到一包数据
 		{
 			if( flag_bd_upgrade_uart == 0 )
@@ -1126,6 +1129,15 @@ static void rt_thread_entry_gps( void* parameter )
 				}
 			}
 		}
+		//-------------------------------------------------
+		/*  V_1++; 
+		 if(V_1>10)  
+         {  
+           V_1=0;
+		   b2=rt_tick_get();
+           rt_kprintf("\r\n                %_% gps   pri:%d   delta:%d \r\n",Prio_GPS,abs(b2-b1));     
+         }*/
+		 //-------------------------------------------------
 		rt_thread_delay(10);   
 
 		//---------------
