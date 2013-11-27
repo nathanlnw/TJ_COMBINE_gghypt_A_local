@@ -324,7 +324,7 @@ static void gsm_thread_entry(void* parameter)
 		 SysConfiguration();	// system config				
 		 
 		 total_ergotic();
-	   Gsm_RegisterInit();	 //  init register states	 ,then	it	will  power on	the module	 
+	     Gsm_RegisterInit();	 //  init register states	 ,then	it	will  power on	the module	 
           
 		 SIMID_Convert_SIMCODE(); //   translate		   
       #ifdef HMI
@@ -342,6 +342,7 @@ static void gsm_thread_entry(void* parameter)
               GSM_Module_TotalInitial();  
             // 3. Receivce & Process   Communication  Module   data ----
 	       GSM_Buffer_Read_Process(); 
+		   rt_thread_delay(8);   	
 	       DataLink_Process();		
              //------------------------------------------------
 		    if (Send_DataFlag== 1) 
@@ -372,18 +373,18 @@ static void gsm_thread_entry(void* parameter)
 	         {
 	             if(Calling_ATA_flag==1)
 	             	{
-                         delay_ms(100);  
+                        rt_thread_delay(3);  
 		                rt_hw_gsm_output("ATA\r\n");    //检查信号强度
 					    if(DispContent)	
 					        rt_kprintf(" 接听   ATA\r\n");   
 
                        Calling_ATA_flag=0;
 	             	}
-			 } 
+			 }  
 			 
 			 //   SMS  Service
 			 SMS_Process();            
-	         rt_thread_delay(15);     	      
+	         rt_thread_delay(10);      	      
 			   
 	}
 }
