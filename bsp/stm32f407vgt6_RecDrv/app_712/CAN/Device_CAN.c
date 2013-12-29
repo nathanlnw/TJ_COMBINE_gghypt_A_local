@@ -35,6 +35,28 @@ u32  Can_same=0;
 u32  Can_loudiao=0;     
 u32  Can_notsame=0; 
 
+u8   CAN_speed_used_Flag=0;   //  显示使用CAN   速度 标志位
+u8   CAN_run_timer=0; 
+u16  Spd_CAN=0;  // 从CAN 取的速度
+
+
+void Can_timer_check(void)
+{
+   if(CAN_speed_used_Flag==1)
+   	{
+   	   CAN_run_timer++;
+	   if(CAN_run_timer>60)
+	   	{  
+	   	   CAN_run_timer=0;
+	       CAN_speed_used_Flag=0;  
+	   	}
+
+   	}
+   else
+   	  CAN_run_timer=0; 
+
+}
+
 void CANGPIO_Configuration(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -87,7 +109,7 @@ void CAN_App_Init(void)
     CAN_InitStructure.CAN_SJW=CAN_SJW_1tq;
     CAN_InitStructure.CAN_BS1=CAN_BS1_13tq;
     CAN_InitStructure.CAN_BS2=CAN_BS2_7tq;   
-    CAN_InitStructure.CAN_Prescaler=100;//20K	        42MHZ     42/(1+bs1+bs2)/prescaler        
+	  CAN_InitStructure.CAN_Prescaler=8;//250K                  42/(1+bs1+bs2)/prescaler
     
 #else	 
    // ----- 北斗扩展信息 ----------	
@@ -237,7 +259,32 @@ TestStatus CAN_RX(void)
 u8  CAN1_Rx_Process(void)
 {
     //u8 iRX=0;
-    // rt_kprintf("    Nathan BDEXT_ID=%08X",RxMessageData.ExtId);	
+    u16   RX_HEX_spd=0;    //  1/256  km/h
+
+	 //  debug    
+	 /*
+     rt_kprintf("    Nathan BDEXT_ID=%08X",RxMessageData.ExtId);	
+     rt_kprintf("\r\nRxMessage="); 
+		for(iCANRX=0;iCANRX<RxMessageData.DLC;iCANRX++)
+			rt_kprintf("%X ",RxMessageData.Data[iCANRX]); 
+       */
+  
+     // TCO1      0CFE6CEE   第7  8  字节      仪表速度
+	 if(0x0CFE6CEE==RxMessageData.ExtId)	  //  J1939  CAN 协议  速度字段ID       
+	 
+   // if(0x031FDE20==RxMessageData.ExtId)	  //  J1939  CAN 协议  速度字段ID   
+	 {  // get  can  spd       byte  1  byte 2      L H  
+          RX_HEX_spd=RxMessageData.Data[6]+(RxMessageData.Data[7]<<8);
+		  Spd_CAN=RX_HEX_spd*10/256;  //  0.1 km/h 
+
+		  CAN_speed_used_Flag=1;// enable use  can spd
+
+
+          //  bebug
+         // rt_kprintf("   RX_hex :%d   spd:%d    truespd:%d km/h \r\n",RX_HEX_spd,Spd_CAN,Spd_CAN/10);	
+	 }
+
+	#if  0
        if(CAN_trans.canid_2_NotGetID==RxMessageData.ExtId)     
 			{  Can_same++;	return PASSED;}     
 	   
@@ -275,6 +322,7 @@ u8  CAN1_Rx_Process(void)
 	       }     
 
 	 }
+	 #endif
 			return true;				
 }	    
 

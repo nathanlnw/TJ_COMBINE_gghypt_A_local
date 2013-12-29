@@ -33,12 +33,13 @@ extern u32   Can_same;
 extern u32   Can_loudiao;
 extern u32   Can_notsame;     
 
+extern u8	 CAN_speed_used_Flag;   //  显示使用CAN	速度 标志位   
+extern u16   Spd_CAN;  // 从CAN 取的速度  
 
 
 
 
-
-
+extern void Can_timer_check(void); 
 extern void CANGPIO_Configuration(void);
 extern void CAN_App_Init(void); 
 extern TestStatus CAN_TX(void);

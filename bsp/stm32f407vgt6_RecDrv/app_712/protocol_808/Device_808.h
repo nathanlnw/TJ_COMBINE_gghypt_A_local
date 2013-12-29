@@ -57,9 +57,9 @@
 #define FARLIGHT_Group_NUM        GPIO_Pin_0 
 
 #define NEARLIGHT_IO_Group          GPIOC             // 近光灯
-#define NEARLIGHT_Group_NUM       GPIO_Pin_1 
+#define NEARLIGHT_Group_NUM       GPIO_Pin_3 
 
-#define FOGLIGHT_IO_Group            GPIOC             //  雾灯
+#define FOGLIGHT_IO_Group            GPIOC             //  雾灯   --------北斗没有这根线了
 #define FOGLIGHT_Group_NUM         GPIO_Pin_3    
 
 #define DOORLIGHT_IO_Group          GPIOA             // 车门灯   预留

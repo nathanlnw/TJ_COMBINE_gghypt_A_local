@@ -46,8 +46,6 @@ switch(type_Sle)
 		lcd_update_all();
 		break;
 
-
-		break;
 	}
 }
 

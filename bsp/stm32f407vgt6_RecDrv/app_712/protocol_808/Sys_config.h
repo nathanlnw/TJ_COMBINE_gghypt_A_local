@@ -67,7 +67,7 @@
 #define    ask_quesstion                                 "ask_quesstion"
 #define    ask_quesstion_size                               1 
 
-#define    text_msg                                         "text_msg"  
+#define    text_msg                                         "text_msg"
 #define    text_msg_size                                       1 
 
  // 3.  ¼ÇÂ¼ 

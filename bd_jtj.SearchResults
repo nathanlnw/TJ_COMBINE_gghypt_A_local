@@ -1,5 +1,10 @@
----- MultiTake_Start Matches (4 in 4 files) ----
-App_485.c (bsp\stm32f407vgt6_recdrv\app_712\u4_485):void MultiTake_Start(void)
-App_485.h (bsp\stm32f407vgt6_recdrv\app_712\u4_485):extern  void  MultiTake_Start(void);
-App_808.c (bsp\stm32f407vgt6_recdrv\app_712\protocol_808):					 // MultiTake_Start();
-Device_485.c (bsp\stm32f407vgt6_recdrv\app_712\u4_485):					MultiTake_Start();    
+---- CAN_speed_used_Flag Matches (9 in 4 files) ----
+Device_CAN.c (bsp\stm32f407vgt6_recdrv\app_712\can):u8   CAN_speed_used_Flag=0;   //  显示使用CAN   速度 标志位
+Device_CAN.c (bsp\stm32f407vgt6_recdrv\app_712\can):   if(CAN_speed_used_Flag==1)
+Device_CAN.c (bsp\stm32f407vgt6_recdrv\app_712\can):	       CAN_speed_used_Flag=0;  
+Device_CAN.c (bsp\stm32f407vgt6_recdrv\app_712\can):		  CAN_speed_used_Flag=1;// enable use  can spd
+Device_CAN.h (bsp\stm32f407vgt6_recdrv\app_712\can):extern u8	 CAN_speed_used_Flag;   //  显示使用CAN	速度 标志位   
+Menu_1_Idle.c (bsp\stm32f407vgt6_recdrv\app_712\lcd):     if(CAN_speed_used_Flag==1)    // 是否从CAN 获取数据 
+Protocol_808.c (bsp\stm32f407vgt6_recdrv\app_712\protocol_808):  if(CAN_speed_used_Flag==1)
+Protocol_808.c (bsp\stm32f407vgt6_recdrv\app_712\protocol_808):  if(CAN_speed_used_Flag==1)
+Protocol_808.c (bsp\stm32f407vgt6_recdrv\app_712\protocol_808):  if(CAN_speed_used_Flag==1)

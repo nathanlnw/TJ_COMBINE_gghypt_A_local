@@ -290,7 +290,7 @@ u8  FarLight_StatusGet(void)
 u8  NearLight_StatusGet(void)
 {
   //  --------------J1pin2		Pc1 		远光灯
-	   return (!GPIO_ReadInputDataBit(NEARLIGHT_IO_Group,NEARLIGHT_Group_NUM));	// PE6
+	  // return (!GPIO_ReadInputDataBit(NEARLIGHT_IO_Group,NEARLIGHT_Group_NUM));	// PE6
 	//		 接高  触发
 }
 
@@ -376,8 +376,8 @@ u8  Get_SensorStatus(void)
         D6      左转灯     *             PE10            10               红
         D5      右转灯     *             PC2              8                白
         D4      远光灯     *             PC0              4                黑
-        D3      近光灯     *             PC1              5                黄
-        D2      雾灯          add          PC3              7                绿      *
+        D3      近光灯     *             PC3              7                绿
+        D2                                                                                           *
         D1      车门          add          PA1              6                灰      *
         D0      预留
    */
@@ -435,10 +435,10 @@ u8  Get_SensorStatus(void)
 		   BD_EXT.Extent_IO_status&= ~0x02;//bit 1  ----->  远光灯     
 		}  
     //  --------------近光灯----------------------
-   		 if(NearLight_StatusGet())  // Pc1
+   		 if(NearLight_StatusGet())  // Pc3
 		  {   //       接高  触发
 		      Sensorstatus|=0x08;
-		       BD_EXT.FJ_IO_1 |=0x10; //bit4	  
+		       BD_EXT.FJ_IO_1 |=0x08; //bit3	  
 		      BD_EXT.Extent_IO_status |= 0x01; //bit 0  ----->  近光灯
 		  }
 		 else
@@ -448,6 +448,7 @@ u8  Get_SensorStatus(void)
 			  BD_EXT.Extent_IO_status &=~0x01; //bit 0  ----->  近光灯 
 		  } 
   // --------------J1pin9          雾灯/   雨刷     
+       #if 0
           if(FogLight_StatusGet())  //PD8  
 		  {   //	   接高  触发
 			  Sensorstatus|=0x04;
@@ -460,6 +461,7 @@ u8  Get_SensorStatus(void)
 			  BD_EXT.FJ_IO_1 &=~0x08; //bit3	  
 			   BD_EXT.Extent_IO_status &= ~0x40;//  bit6 ----> 雾灯 
 		  } 
+        #endif		 
   //  --------------J1pin6			 车门/飞翼
 	    if(DoorLight_StatusGet())  // PE3     
 		{	//		 接高  触发

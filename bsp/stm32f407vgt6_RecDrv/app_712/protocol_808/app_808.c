@@ -377,6 +377,7 @@ static void timeout_app(void *  parameter)
 			 App_thread_timer(); 
 			 gps_thread_timer(); 
 			 Photo_send_TimeOut();  
+			 Can_timer_check();  
 
 			 //车辆信号线状态指示  //刹车线//左转//右转//喇叭//远光灯//雨刷//车门//null
 		     

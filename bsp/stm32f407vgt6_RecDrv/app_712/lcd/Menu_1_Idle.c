@@ -198,6 +198,13 @@ void  Disp_Idle(void)
 		Dis_date[13+i*3]=Time[i]%10+'0'; 
 
        //----------------速度--------------------------
+     if(CAN_speed_used_Flag==1)    // 是否从CAN 获取数据 
+     	{
+     	   Dis_speDer[0]='C';
+		   disp_spd=Spd_CAN/10;
+
+     	}
+	 else
      if((JT808Conf_struct.Speed_GetType==1)&&(JT808Conf_struct.DF_K_adjustState==1)) //从传感器取速度
 	    {
 	       Dis_speDer[0]='C';
