@@ -2174,32 +2174,7 @@ u8  Stuff_Normal_Data_0200H(void)
 	 Original_info[Original_info_Wr++]=0x00;
        Original_info[Original_info_Wr++]=BD_EXT.Extent_IO_status; 
 
-	   //  附加信息 6  -----------------------------	  
-	 //  附加信息 ID
-	 Original_info[Original_info_Wr++]=0xFE; //信号强度
-	 //  附加信息长度
-	 Original_info[Original_info_Wr++]=2; 
-	 //  类型
-	 Original_info[Original_info_Wr++]= BD_EXT.FJ_SignalValue;  
-	 Original_info[Original_info_Wr++]=0x00;  //  保留 
 
-        //if(DispContent)
-         //     printf("\r\n---- Satelitenum: %d , CSQ:%d\r\n",Satelite_num,ModuleSQ);  
-
-     //  附加信息 7  -----------------------------	   
-	 //  附加信息 ID
-	 Original_info[Original_info_Wr++]=0xFF; //自定义模拟量上传
-	 //  附加信息长度
-	 Original_info[Original_info_Wr++]=6; 
-	 //  类型
-	 Original_info[Original_info_Wr++]= BD_EXT.FJ_IO_1; 
-	 Original_info[Original_info_Wr++]= BD_EXT.FJ_IO_2;  
-	 Original_info[Original_info_Wr++]=(BD_EXT.AD_0>>8);  // 模拟量 1
-	 Original_info[Original_info_Wr++]=BD_EXT.AD_0;
-	 Original_info[Original_info_Wr++]=(BD_EXT.AD_1>>8);  // 模拟量 2
-	 Original_info[Original_info_Wr++]=BD_EXT.AD_1;
-
- 
  //  3. Send 
  Protocol_End(Packet_Normal ,0);
    	
@@ -2311,31 +2286,7 @@ rt_kprintf("\r\n ----- 0x0200 current 附加信息 \r\n");
        Original_info[Original_info_Wr++]=0x00;
 	 Original_info[Original_info_Wr++]=0x00;
        Original_info[Original_info_Wr++]=BD_EXT.Extent_IO_status; 
-	   //  附加信息 5  -----------------------------	  
-	 //  附加信息 ID
-	 Original_info[Original_info_Wr++]=0xFE; //信号强度
-	 //  附加信息长度
-	 Original_info[Original_info_Wr++]=2; 
-	 //  类型
-	 Original_info[Original_info_Wr++]= BD_EXT.FJ_SignalValue; 
-	 Original_info[Original_info_Wr++]=0x00;  //  保留 
 
-        //if(DispContent)
-         //     printf("\r\n---- Satelitenum: %d , CSQ:%d\r\n",Satelite_num,ModuleSQ);  
-
-        //  附加信息 6  -----------------------------	  
-	 //  附加信息 ID
-	 Original_info[Original_info_Wr++]=0xFF; //自定义模拟量上传
-	 //  附加信息长度
-	 Original_info[Original_info_Wr++]=6; 
-	 //  类型
-	 Original_info[Original_info_Wr++]= BD_EXT.FJ_IO_1; 
-	 Original_info[Original_info_Wr++]= BD_EXT.FJ_IO_2;  
-	 Original_info[Original_info_Wr++]=(BD_EXT.AD_0>>8);  // 模拟量 1
-	 Original_info[Original_info_Wr++]=BD_EXT.AD_0;
-	 Original_info[Original_info_Wr++]=(BD_EXT.AD_1>>8);  // 模拟量 2
-	 Original_info[Original_info_Wr++]=BD_EXT.AD_1;
-	
  //  3. Send 
  Protocol_End(Packet_Normal ,0);
 
@@ -2442,32 +2393,6 @@ u8  Stuff_Current_Data_0201H(void)   //   位置信息查询回应
 
     }
 
-    
-	   //  附加信息 5  -----------------------------	  
-	 //  附加信息 ID
-	 Original_info[Original_info_Wr++]=0xFE; //信号强度
-	 //  附加信息长度
-	 Original_info[Original_info_Wr++]=2; 
-	 //  类型
-	 Original_info[Original_info_Wr++]= BD_EXT.FJ_SignalValue; 
-	 Original_info[Original_info_Wr++]=0x00;  //  保留 
-
-        //if(DispContent)
-         //     printf("\r\n---- Satelitenum: %d , CSQ:%d\r\n",Satelite_num,ModuleSQ);  
-
-        //  附加信息 6  -----------------------------	  
-	 //  附加信息 ID
-	 Original_info[Original_info_Wr++]=0xFF; //自定义模拟量上传
-	 //  附加信息长度
-	 Original_info[Original_info_Wr++]=6; 
-	 //  类型
-	 Original_info[Original_info_Wr++]= BD_EXT.FJ_IO_1; 
-	 Original_info[Original_info_Wr++]= BD_EXT.FJ_IO_2;  
-	 Original_info[Original_info_Wr++]=(BD_EXT.AD_0>>8);  // 模拟量 1
-	 Original_info[Original_info_Wr++]=BD_EXT.AD_0;
-	 Original_info[Original_info_Wr++]=(BD_EXT.AD_1>>8);  // 模拟量 2
-	 Original_info[Original_info_Wr++]=BD_EXT.AD_1;
-	
  //  3. Send 
 Protocol_End(Packet_Normal ,0);
  if(DispContent)
