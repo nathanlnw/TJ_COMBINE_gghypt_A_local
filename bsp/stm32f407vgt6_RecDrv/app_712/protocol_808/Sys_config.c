@@ -13,7 +13,7 @@
 #include  "Vdr.h"
 
  
-#define   SYSID            0x11CE        
+#define   SYSID            0x11BE   //11BE     
                                 /*        
                                                         0x0000   -----   0x00FF  生产和研发用
                                                         0x0100   -----   0x0FFF  产品出货用

@@ -7460,7 +7460,7 @@ void TCP_RX_Process( u8  LinkNum)  //  ---- 808  标准协议
 									  /* cycle_read++;   //  收到应答才递增
 									   if(cycle_read>=Max_CycleNum)
 											   cycle_read=0;
-									   ReadCycle_status=RdCycle_Idle;
+									   ReadCycle_status=RdCycle_Idle; 
                                                                  */
                                         //--------------  多媒体上传相关  --------------                                       
 									   if(MediaObj.Media_transmittingFlag==1)  // clear									      

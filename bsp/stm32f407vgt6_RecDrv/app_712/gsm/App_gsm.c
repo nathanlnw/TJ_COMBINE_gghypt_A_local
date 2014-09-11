@@ -89,11 +89,11 @@ void   DialLink_TimeOut_Process(void)
 	   {
 					  DataDial.start_dial_counter++; 
 					   //-------- add  on  2013 4-8  -----------
-					  if( DataDial.start_dial_counter==593)
+					  if(( DataDial.start_dial_counter==593)&&(Speed_gps<=10))
 					  	    DataLink_EndFlag=1;
-					  if( DataDial.start_dial_counter==597) 
+					  if(( DataDial.start_dial_counter==597)&&(Speed_gps<=10)) 
 					        Redial_reset_save=1;
-					  if(DataDial.start_dial_counter>600)   	 
+					  if((DataDial.start_dial_counter>600)&&(Speed_gps<=10))    	 
 					  {
 						 DataDial.start_dial_counter=0; 
 						 //----------  ´æ´¢ÐÝÃß¶¨Ê±Æ÷ -----------
@@ -335,14 +335,21 @@ static void gsm_thread_entry(void* parameter)
 	 //--------------------------------------  
 	while (1)
 	{
-	
-            // 1.  after power  on    get imsi code  	 	
-              IMSIcode_Get(); 
-            //  2. after get imsi   Comm   AT  initial   start 
-              GSM_Module_TotalInitial();  
-            // 3. Receivce & Process   Communication  Module   data ----
-	       GSM_Buffer_Read_Process(); 
-		   rt_thread_delay(8);   	
+	     
+		 if(GSM_Working_State())
+		 {
+	            // 1.  after power  on    get imsi code  	 	
+	              IMSIcode_Get(); 
+	            //  2. after get imsi   Comm   AT  initial   start 
+	              GSM_Module_TotalInitial();  
+	            // 3. Receivce & Process   Communication  Module   data ----
+		       GSM_Buffer_Read_Process(); 
+		 }
+		   rt_thread_delay(20);    
+		   
+		if(GSM_Working_State()==2)	
+		 {
+		    
 	       DataLink_Process();		
              //------------------------------------------------
 		    if (Send_DataFlag== 1) 
@@ -387,8 +394,8 @@ static void gsm_thread_entry(void* parameter)
 	         rt_thread_delay(10);      	      
 			   
 	}
-}
- 
+  }
+} 
 		  	
 
 static void timeout_gsm(void *  parameter)
@@ -413,6 +420,8 @@ static void timeout_gsm(void *  parameter)
     DialLink_TimeOut_Process();
  //  CSQ
      GSM_CSQ_timeout();
+  //  AT cmd timeout
+      AT_cmd_send_TimeOUT();   
   #ifdef SMS_ENABLE
   //  SMS  timer
     SMS_timer();
