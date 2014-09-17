@@ -169,6 +169,8 @@ ALIGN(RT_ALIGN_SIZE)extern  MENUITEM	Menu_5_other;
 
 ALIGN(RT_ALIGN_SIZE)extern  MENUITEM	Menu_6_SetInfor;
 ALIGN(RT_ALIGN_SIZE)extern  MENUITEM	Menu_7_CentreTextDisplay;
+ALIGN(RT_ALIGN_SIZE)extern  MENUITEM	Menu_8_SIMnoFee; // add  later
+
 
 
 

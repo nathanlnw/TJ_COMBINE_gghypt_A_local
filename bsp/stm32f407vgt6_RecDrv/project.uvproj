@@ -1431,6 +1431,11 @@
               <FileType>1</FileType>
               <FilePath>.\app_712\lcd\Menu_0_0_type.c</FilePath>
             </File>
+            <File>
+              <FileName>Menu_8_SimNoFee.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app_712\lcd\Menu_8_SimNoFee.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

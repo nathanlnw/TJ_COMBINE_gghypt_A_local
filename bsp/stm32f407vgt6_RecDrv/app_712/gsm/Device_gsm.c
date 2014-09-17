@@ -1951,6 +1951,10 @@ static void GSM_Process(u8 *instr, u16 len)
 	if ((strlen((char*)GSM_rx) >= 7) && (strncmp((char*)GSM_rx, "CONNECT", 7) == 0))
 	{
 	      connect=true;
+          //-------------------------
+          pMenuItem=&Menu_1_Idle;  //  正式出货没有检定状态 
+	      pMenuItem->show();	
+		  //-------------------
 	}
 	if((strncmp((char*)GSM_rx,"ERROR: 13",9)==0)||(strncmp((char*)GSM_rx,"ERROR:13",8)==0)||(strncmp((char*)GSM_rx,"ERROR:35",8)==0))//ERROR:13
 	{
@@ -1975,9 +1979,16 @@ static void GSM_Process(u8 *instr, u16 len)
 
 	}
 	else  //ERROR: 14 
-	if((strncmp((char*)GSM_rx,"ERROR: 30",9)==0)||(strncmp((char*)GSM_rx,"ERROR: 20",9)==0)||(strncmp((char*)GSM_rx,"ERROR: 14",14)==0)||(strncmp((char*)GSM_rx,"ERROR: 19",14)==0)\
-		||(strncmp((char*)GSM_rx,"ERROR: 6",8)==0)||(strncmp((char*)GSM_rx,"ERROR: 7",8)==0)||(strncmp((char*)GSM_rx,"ERROR: 8",8)==0)||(strncmp((char*)GSM_rx,"ERROR: 10",9)==0)||(strncmp((char*)GSM_rx,"ERROR:35",8)==0))	    
+	if((strncmp((char*)GSM_rx,"ERROR:30",8)==0)||(strncmp((char*)GSM_rx,"ERROR:20",8)==0)||(strncmp((char*)GSM_rx,"ERROR:14",8)==0)||(strncmp((char*)GSM_rx,"ERROR:19",8)==0)\
+		||(strncmp((char*)GSM_rx,"ERROR:6",7)==0)||(strncmp((char*)GSM_rx,"ERROR:7",7)==0)||(strncmp((char*)GSM_rx,"ERROR:8",7)==0)||(strncmp((char*)GSM_rx,"ERROR:10",8)==0)||(strncmp((char*)GSM_rx,"ERROR:35",8)==0))	    
 	{
+	    //-------------------------------------------------------------------------------------
+	            if(strncmp((char*)GSM_rx,"ERROR:20",8)==0)
+             	{
+					 pMenuItem=&Menu_8_SIMnoFee;  //  正式出货没有检定状态
+			         pMenuItem->show();	
+		        }
+	  //----------------------------------------------------------------------------------------
 		     if (Dial_jump_State==7)
 				{  
 				       rt_hw_gsm_output("AT%IPCLOSE=1\r\n");   
